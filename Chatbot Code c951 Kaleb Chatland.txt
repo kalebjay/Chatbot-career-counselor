@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    
+<!--Kaleb Chatland C951-->
+<!-- -->
+ 
+<category>
+    <pattern>*</pattern>
+    <template>
+    <random>
+        <li>Sorry, what was that?</li>
+        <li>I don’t have an answer for that.</li>
+        <li>My apoligies, I am limited in my responses. Please try again.</li>
+        <li>Can you try to say it a different way?</li>
+        <LI>I can give career advice about computer jobs.<br/>
+            There are 5 main categories I can advise in.<br/>
+            They are software engineering, databases, full stack web development,<br/>
+            mobile app developer, and cyber security.<br/>
+            Which area would you like to learn more about?</LI>
+    </random>
+    </template>
+</category>
+  
+<category>
+    <pattern>HI ^</pattern>
+    <template>Greetings, I am Ziff.<br/>
+    I am a career chatbot that advises students.<b/>
+    What is your name?<br/>
+    Please type "My name is ______".
+    </template>
+</category>
+
+<category>
+    <pattern>HELLO</pattern>
+    <template><srai>HI</srai></template>
+</category>
+
+<category>
+    <pattern>MY NAME IS *</pattern>
+    <template>Hi <set name="name"><star/></set>, nice to meet you.<br/>
+        I can help give advice about careers in computer science.<br/>
+        There are 5 main categories I can advise in.<br/>
+        They are SOFTWARE ENGINEERING, DATABASES, WEB DEVELOPMENT,<br/>
+        MOBILE APP DEVELOPMENT, and CYBER SECURITY.<br/>
+        Which area would you like to learn more about?
+    </template>
+</category>
+
+<category>
+    <pattern>WHAT IS MY NAME</pattern>
+    <template>Your name is <get name="name"/>.</template>
+</category>  
+
+<category>
+    <pattern>WHAT IS YOUR NAME ^</pattern>
+    <template>My name is Ziff.</template>
+</category>
+  
+<category>
+    <pattern>^ ADVICE ^</pattern>
+    <template>I can give career advice about computer jobs.<br/>
+    There are 5 main categories I can advise in.<br/>
+    They are software engineering, databases, full stack web development,<br/>
+    mobile app developer, and cyber security.<br/>
+    Which area would you like to learn more about?</template>
+</category>  
+
+<category>
+    <pattern>^ Tell ME ^ COMPUTER SCIENCE ^</pattern>
+    <template><srai>^ ADVICE ^</srai></template>
+</category>
+
+<category>
+    <pattern>^ Tell ME ^ CS ^</pattern>
+    <template><srai>^ ADVICE ^</srai></template>
+</category>
+
+<category>
+    <pattern>^ I NEED HELP ^</pattern>
+    <template><srai>^ ADVICE ^</srai></template>
+</category>
+
+<category>
+    <pattern>^ CAREER ^</pattern>
+    <template><srai>^ ADVICE ^</srai></template>
+</category>
+
+<category>
+    <pattern>WHAT ^ CAREER ^ OPTIONS ^ DEGREE</pattern>
+    <template><srai>^ ADVICE ^</srai></template>
+</category>
+
+<category>
+    <pattern>WHAT ^ DEGREE ^ COMPUTER SCIENCE</pattern>
+    <template><srai>^ ADVICE ^</srai></template>
+</category>
+
+<category>
+    <pattern>^ ARE ^ YOU ^</pattern>
+    <template>I am Ziff, a career advising chatbot.<br/>
+    Ask me about careers in computer science and I'll do my best to advise you!<br/>
+    There are 5 main categories I can advise in.<br/>
+    They are software engineering, databases, full stack web development,<br/>
+    mobile app developer, and cyber security.<br/>
+    Which area would you like to learn more about?
+    </template>
+</category>
+
+<!--SOFTWARE ENGINEERING QUESTIONS-->
+ <category>
+    <pattern>SOFTWARE ENGINEERING</pattern>
+    <that>WHICH AREA WOULD YOU LIKE TO LEARN MORE ABOUT</that>
+ <template>
+  <think>
+    <set name="surveyname">User Survey</set>
+    <set name="question1">Software engineering involves writing code for a huge range of problems.<br/>
+    It requires many skills such as multitaksing, teamwork, attention to detail, <br/>
+    and code knowedge. Common languages are Python, C++, C#, Java, and JavaScript.<br/>
+        Do you like solving problems?</set>
+    <set name="question2">Do you like learning new skills?</set>
+    <set name="question3">These are signs you're a good fit for software engineering.<br/>
+        Do you like thinking critically and working in a team?</set>
+    <set name="question4">Do you have a high attention to detail?</set>
+    <set name="responses">Survey Responses: </set>
+    <set name="qnum">1</set>
+  </think>
+ <srai>SurveyLoop</srai>
+ </template>
+</category>
+<category>
+<pattern>SurveyLoop</pattern>
+ <template>
+   <think>
+    <set name="question"><get><name>question<get name="qnum"/></name></get></set>
+   </think>
+  <condition name="question">
+    <li value="unknown"><srai>EndSurvey</srai></li>
+    <li>
+    <think>
+    <set name="topic">SURVEY</set></think><get name="question"/></li>
+  </condition>
+ </template>
+</category>
+<topic name="SURVEY">
+<category>
+ <pattern>_</pattern>
+  <template>
+   <think>
+    <set name="topic"/>
+    <set name="responses">
+    <get name="responses"/>
+    ---
+    <star/>
+    </set>
+    <set name="qnum">
+    <map name="successor">
+    <get name="qnum"/>
+    </map>
+    </set>
+   </think>
+  <srai>SurveyLoop</srai>
+</template>
+</category>
+</topic>
+<category>
+<pattern>EndSurvey</pattern>
+<template>
+    If you answered yes to most of these questions you may find this area a good fit.<br/>
+    If you answered no to most, that's okay, there are many other areas in computer science.<br/>
+    Which area would you like to learn more about?
+    </template>
+</category>
+<!--SOFTWARE ENGINEERING END-->
+
+<!--DATABASE QUESTIONS-->
+ <category>
+    <pattern>DATABASES</pattern>
+    <that>WHICH AREA WOULD YOU LIKE TO LEARN MORE ABOUT</that>
+ <template>
+  <think>
+    <set name="surveyname">User Survey</set>
+    <set name="question1">Databases are the "back end", meaning the server side code that <br/>  
+        stores data. Database techs often use SQL to update and maintain databases. <br/>
+        There are jobs to design them, jobs to maintain them, jobs to use them, and jobs that do all of these.<br/>
+        Do you like working with data?</set>
+    <set name="question2">Are you interested in anaylizing data and what you can do with it?</set>
+    <set name="question3">Do you like the idea of designing and building databases with huge amounts of data?</set>
+    <set name="question4">Do you like working with Structured Query Language (SQL)?</set>
+    <set name="responses">Survey Responses: </set>
+    <set name="qnum">1</set>
+  </think>
+ <srai>SurveyLoop</srai>
+ </template>
+</category>
+<category>
+<pattern>SurveyLoop</pattern>
+ <template>
+   <think>
+    <set name="question"><get><name>question<get name="qnum"/></name></get></set>
+   </think>
+  <condition name="question">
+    <li value="unknown"><srai>EndSurvey</srai></li>
+    <li>
+    <think>
+    <set name="topic">SURVEY</set></think><get name="question"/></li>
+  </condition>
+ </template>
+</category>
+<topic name="SURVEY">
+<category>
+ <pattern>_</pattern>
+  <template>
+   <think>
+    <set name="topic"/>
+    <set name="responses">
+    <get name="responses"/>
+    ---
+    <star/>
+    </set>
+    <set name="qnum">
+    <map name="successor">
+    <get name="qnum"/>
+    </map>
+    </set>
+   </think>
+  <srai>SurveyLoop</srai>
+</template>
+</category>
+</topic>
+<category>
+<pattern>EndSurvey</pattern>
+<template>
+    If you answered yes to most of these questions you may find this area a good fit.<br/>
+    If you answered no to most, that's okay, there are many other areas in computer science.<br/>
+    Which area would you like to learn more about?
+    </template>
+</category>
+<!--DATABASES END-->
+
+<!--WEB DEVELOPMENT QUESTIONS-->
+ <category>
+    <pattern>WEB DEVELOPMENT</pattern>
+    <that>WHICH AREA WOULD YOU LIKE TO LEARN MORE ABOUT</that>
+ <template>
+  <think>
+    <set name="surveyname">User Survey</set>
+    <set name="question1">Web development involves many aspects.<br/> 
+    Web developers create the software needed to make the web work.<br/>
+    Do you like the idea of designing web pages?</set>
+    <set name="question2">Do you know HTML, CSS, and JavaScript?</set>
+    <set name="question3">Are you more artistic and like the idea of building User Interfaces?</set>
+    <set name="question4">Do you like being creative and end user focused?</set>
+    <set name="responses">Survey Responses: </set>
+    <set name="qnum">1</set>
+  </think>
+ <srai>SurveyLoop</srai>
+ </template>
+</category>
+<category>
+<pattern>SurveyLoop</pattern>
+ <template>
+   <think>
+    <set name="question"><get><name>question<get name="qnum"/></name></get></set>
+   </think>
+  <condition name="question">
+    <li value="unknown"><srai>EndSurvey</srai></li>
+    <li>
+    <think>
+    <set name="topic">SURVEY</set></think><get name="question"/></li>
+  </condition>
+ </template>
+</category>
+<topic name="SURVEY">
+<category>
+ <pattern>_</pattern>
+  <template>
+   <think>
+    <set name="topic"/>
+    <set name="responses">
+    <get name="responses"/>
+    ---
+    <star/>
+    </set>
+    <set name="qnum">
+    <map name="successor">
+    <get name="qnum"/>
+    </map>
+    </set>
+   </think>
+  <srai>SurveyLoop</srai>
+</template>
+</category>
+</topic>
+<category>
+<pattern>EndSurvey</pattern>
+<template>
+    If you answered yes to most of these questions you may find this area a good fit.<br/>
+    If you answered no to most, that's okay, there are many other areas in computer science.<br/>
+    Which area would you like to learn more about?
+    </template>
+</category>
+<!--WEB DEVELOPMENT END-->
+
+<!--MOBILE APP QUESTIONS-->
+ <category>
+    <pattern>^ MOBILE ^</pattern>
+    <that>WHICH AREA WOULD YOU LIKE TO LEARN MORE ABOUT</that>
+ <template>
+  <think>
+    <set name="surveyname">User Survey</set>
+    <set name="question1">Mobile application developers write the code for apps <br/>
+    that people download onto their cell phones. They work on the app <br/>
+    design, the core code, as well as servers and databases. Common languages <br/>
+    are Java, Kotlin, Swift, and Objective-C.<br/>
+    Do you like the idea of designing mobile apps?</set>
+    <set name="question2">Are you interested in the ease of access of apps?</set>
+    <set name="question3">Are you interested in all aspects of software with tighter constraint challenges?</set>
+    <set name="question4">Do you like being creative and end user focused?</set>
+    <set name="responses">Survey Responses: </set>
+    <set name="qnum">1</set>
+  </think>
+ <srai>SurveyLoop</srai>
+ </template>
+</category>
+<category>
+<pattern>SurveyLoop</pattern>
+ <template>
+   <think>
+    <set name="question"><get><name>question<get name="qnum"/></name></get></set>
+   </think>
+  <condition name="question">
+    <li value="unknown"><srai>EndSurvey</srai></li>
+    <li>
+    <think>
+    <set name="topic">SURVEY</set></think><get name="question"/></li>
+  </condition>
+ </template>
+</category>
+<topic name="SURVEY">
+<category>
+ <pattern>_</pattern>
+  <template>
+   <think>
+    <set name="topic"/>
+    <set name="responses">
+    <get name="responses"/>
+    ---
+    <star/>
+    </set>
+    <set name="qnum">
+    <map name="successor">
+    <get name="qnum"/>
+    </map>
+    </set>
+   </think>
+  <srai>SurveyLoop</srai>
+</template>
+</category>
+</topic>
+<category>
+<pattern>EndSurvey</pattern>
+<template>
+    If you answered yes to most of these questions you may find this area a good fit.<br/>
+    If you answered no to most, that's okay, there are many other areas in computer science.<br/>
+    Which area would you like to learn more about?
+    </template>
+</category>
+<!--MOBILE APP END-->
+
+<!--CYBER SECURITY QUESTIONS-->
+ <category>
+    <pattern>^ CYBER ^</pattern>
+    <that>WHICH AREA WOULD YOU LIKE TO LEARN MORE ABOUT</that>
+ <template>
+  <think>
+    <set name="surveyname">User Survey</set>
+    <set name="question1">Cyber security personnel work to keep data and programs safe. <br/>
+    They require a lot of knowledge about hacking and intrusion methods and how <br/>
+    to secure software. There are many aspects to cyber security and it dips into <br/>
+    all of the categories of programming.<br/>
+    Do you like the idea keeping software safe and secure?</set>
+    <set name="question2">Are you interested in hacking and intrusion methods?</set>
+    <set name="question3">Are you interested in incident handling and detective work?</set>
+    <set name="question4">Do you have excellent communication and soft skills to improve an organization?</set>
+    <set name="responses">Survey Responses: </set>
+    <set name="qnum">1</set>
+  </think>
+ <srai>SurveyLoop</srai>
+ </template>
+</category>
+<category>
+<pattern>SurveyLoop</pattern>
+ <template>
+   <think>
+    <set name="question"><get><name>question<get name="qnum"/></name></get></set>
+   </think>
+  <condition name="question">
+    <li value="unknown"><srai>EndSurvey</srai></li>
+    <li>
+    <think>
+    <set name="topic">SURVEY</set></think><get name="question"/></li>
+  </condition>
+ </template>
+</category>
+<topic name="SURVEY">
+<category>
+ <pattern>_</pattern>
+  <template>
+   <think>
+    <set name="topic"/>
+    <set name="responses">
+    <get name="responses"/>
+    ---
+    <star/>
+    </set>
+    <set name="qnum">
+    <map name="successor">
+    <get name="qnum"/>
+    </map>
+    </set>
+   </think>
+  <srai>SurveyLoop</srai>
+</template>
+</category>
+</topic>
+<category>
+<pattern>EndSurvey</pattern>
+<template>
+    If you answered yes to most of these questions you may find this area a good fit.<br/>
+    If you answered no to most, that's okay, there are many other areas in computer science.<br/>
+    Which area would you like to learn more about?
+    </template>
+</category>
+<!--CYBER SECURITY END-->
+
+
+
+<category>
+    <pattern>SHOW RESULTS ^</pattern>
+    <template>This is what you answered:<br/>
+    <get name="responses"/></template>
+</category>
+  
+<category>
+    <pattern>^ SOFTWARE ENGINEERING ^</pattern>
+    <template>Software engineering involves writing code for a huge range of problems.<br/>
+    It requires many skills such as multitaksing, teamwork, attention to detail, <br/>
+    and code knowedge. Common languages are Python, C++, C#, Java, and JavaScript.
+    </template>
+</category> 
+  
+<category>
+    <pattern>^ DATABASE ^</pattern>
+    <template>Databases are the "back end", meaning the server side code that <br/>  
+    stores data. Database techs often use SQL to update and maintain databases. <br/>
+    There are jobs to design them, jobs to maintain them, jobs to use them, and jobs that do all of this.
+    </template>
+</category>  
+ 
+<category>
+    <pattern>^ DATA ^ </pattern>
+    <template><srai>^ DATABASE ^</srai> </template>
+</category> 
+ 
+<category>
+    <pattern>^ DATABASES ^ </pattern>
+    <template><srai>^ DATABASE ^</srai> </template>
+</category>
+
+
+  
+<category>
+    <pattern>^ FULL STACK ^</pattern>
+    <template>A full stack developer is a jack of all trades.<br/>
+    They work on the front end which is what a user will see. <br/>
+    This is called the client side and is what a web page looks like.<br/>
+    The back end is the server side and consists of databases and code <br/>
+    that makes the program work. Full stack developers require <br/>
+    various skills to be successful and know a bit about a lot of things. 
+    </template>
+</category>  
+
+<category>
+    <pattern>^ WEB DEVELOPMENT ^ </pattern>
+    <template><srai>^ FULL STACK ^</srai> </template>
+</category>
+
+<category>
+    <pattern>^ WEB ^ DEVELOPER ^ </pattern>
+    <template><srai>^ FULL STACK ^</srai> </template>
+</category>
+
+<category>
+    <pattern>^ FRONT END ^ </pattern>
+    <template>The front end, also referred to as the client side, <br/>
+    is how a web page appears to a person. It is more artistic and less <br/>
+    anaylitical. A web developer on the front end creates and manages links, <br/>
+    chooses colors and fonts, set backgrounds, and crafts the general look <br/>
+    and feel of a web page. They use HTML and CSS as well as JavaScript.
+    </template>
+</category>
+
+<category>
+    <pattern>^ BACK END ^ </pattern>
+    <template>The back end, also referred to as the server side, <br/>
+    is the code under to hood. It is what makes the program work and function. <br/>
+    The back end includes the databases that store all of the information <br/>
+    that a program will use. It also includes the code that sends requests <br/>
+    to the client side. Databases are written in SQL while the core code <br/>
+    consists of lanuages such as PHP, Ruby, and Python.
+    </template>
+</category>
+  
+<category>
+    <pattern>^ MOBILE APP ^</pattern>
+    <template>Mobile application developers write the code for apps <br/>
+    that people download onto their cell phones. They work on the app <br/>
+    design, the core code as well as servers and databases. Common languages <br/>
+    are Java, Kotlin, Swift, and Objective-C.
+    </template>
+</category>  
+
+<category>
+    <pattern>^ MOBILE ^ </pattern>
+    <template><srai>^ MOBILE APP ^</srai> </template>
+</category>
+
+<category>
+    <pattern>^ MOBILE ^ APPLICATIONS ^</pattern>
+    <template><srai>^ MOBILE APP ^</srai> </template>
+</category>
+
+  
+<category>
+    <pattern>^ CYBER ^</pattern>
+    <template>Cyber security personnel work to keep data and programs safe. <br/>
+    They require a lot of knewledge about hacking and intrusion methods and how <br/>
+    to secure software. There are many aspects to cyber security and it dips into <br/>
+    all of the categories of programming. 
+    </template>
+</category>  
+  
+<category>
+    <pattern>^ CYBERSECURITY ^</pattern>
+    <template><srai>^ CYBER ^</srai> </template>
+</category> 
+  
+<category>
+    <pattern>^ THANK YOU ^</pattern>
+    <template>
+        <random>
+        <li>No problem.</li>
+        <li>I am glad to help.</li>
+        <li>Hopefully this was helpful.</li>
+        <li>You are very welcome.</li>
+    </random>
+    </template>
+</category>  
+
+<category>
+    <pattern>^ THANKS ^</pattern>
+    <template><srai>^ THANK YOU ^</srai> </template>
+</category>
+
+<category>
+    <pattern>^ BYE ^</pattern>
+    <template>
+        <random>
+        <li>Bye bye now, good luck!</li>
+        <li>Have a great day!</li>
+        <li>Hopefully this was helpful, best of luck.</li>
+        <li>I wish you the best in all of your endeavours.</li>
+    </random>
+    </template>
+</category>
+
+<category>
+    <pattern>^ GOODBYE ^</pattern>
+    <template><srai>^ BYE ^</srai> </template>
+</category>
+
+<category>
+    <pattern>^ SEE YOU LATER ^</pattern>
+    <template><srai>^ BYE ^</srai> </template>
+</category>
+
+<category>
+    <pattern>^ C ^ U ^</pattern>
+    <template><srai>^ BYE ^</srai> </template>
+</category>  
+  
+  
+</aiml>
